@@ -1,0 +1,7 @@
+*.csv
+*.png
+*.tif
+*.xlsx
+
+__pycache__/
+ECHO Images/
