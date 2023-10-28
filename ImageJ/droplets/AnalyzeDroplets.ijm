@@ -2,7 +2,7 @@
 var closeWindow = false;
 if (lengthOf(getArgument()) > 0) {
 	// Open the image
-	open(getArgument());
+	open(getArgument(), "virtual");
 	closeWindow = true;
 }
 
