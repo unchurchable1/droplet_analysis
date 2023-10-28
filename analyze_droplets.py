@@ -36,7 +36,7 @@ def summarize_droplet_sizes(csv_file_path):
     bin_size = 10
 
     # Count all ROIs
-    total_rois, large_rois = 0, 0
+    total_rois = 0
 
     # Read the CSV file
     with open(csv_file_path, newline="") as csvfile:
@@ -46,9 +46,6 @@ def summarize_droplet_sizes(csv_file_path):
         for row in reader:
             # Get the Feret diameter value from the current row
             feret_diameter = float(row["Feret"])
-            # Count ROIs large enough to hold a conidium
-            if feret_diameter >= 40:
-                large_rois += 1
             total_rois += 1
             # Calculate the bin for the current value
             bin_number = int(feret_diameter // bin_size)
@@ -73,9 +70,6 @@ def summarize_droplet_sizes(csv_file_path):
 
     print(f"Droplet size summary has been written to {image_name}.csv")
     print(f"Recorded {total_rois} total ROIs")
-    print(
-        f"{large_rois} large ROIs : {round(large_rois / (total_rois + large_rois) * 100, 2)}%"
-    )
 
     # Extract the data for plotting
     bins = [bin_num * bin_size for bin_num in sorted_summary.keys()]
