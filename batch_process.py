@@ -51,7 +51,9 @@ def batch_process(image_folder):
                     os.remove(f"{current_folder}/{file}")
 
             # Check if the album has already been processed
-            if os.path.exists(f"droplets/images/{os.path.basename(current_folder)}.tif"):
+            if os.path.exists(
+                f"droplets/images/{os.path.basename(current_folder)}.tif"
+            ):
                 if os.path.exists(
                     f"droplets/results/Results_{os.path.basename(current_folder)}.csv"
                 ):
@@ -77,9 +79,7 @@ def batch_process(image_folder):
     os.chdir(os.path.dirname(__file__))
     for file in os.listdir("ImageJ/droplets/results"):
         if file.endswith(".csv"):
-            analyze_droplets.summarize_droplet_sizes(
-                f"ImageJ/droplets/results/{file}"
-            )
+            analyze_droplets.summarize_droplet_sizes(f"ImageJ/droplets/results/{file}")
 
     # Compile the results into a workbook
     compile_workbook.main()
