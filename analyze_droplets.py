@@ -36,10 +36,8 @@ def summarize_droplet_sizes(csv_file_path):
     summary = {}
     # Define the bin size for summarizing in increments of 10 microns
     bin_size = 10
-    # Count all ROIs
-    total_rois = 0
     # Read the CSV file
-    with open(csv_file_path, newline="") as csvfile:
+    with open(csv_file_path, encoding="utf-8", newline="") as csvfile:
         reader = csv.DictReader(csvfile)
         # Process each row in the CSV
         for row in reader:
@@ -47,16 +45,15 @@ def summarize_droplet_sizes(csv_file_path):
             bin_number = int(float(row["Feret"]) // bin_size)
             # Update the count for the corresponding bin
             summary[bin_number] = summary.get(bin_number, 0) + 1
-            total_rois += 1
 
     # Sort the summary dictionary by bin number
     sorted_summary = dict(sorted(summary.items()))
 
     # Write the summary to a new CSV file
-    with open(f"results/{image_name}.csv", "w", newline="") as csvfile:
-        fieldnames = ["Bin (microns)", "Count"]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
+    with open(
+        f"results/{image_name}.csv", "w", encoding="utf-8", newline=""
+    ) as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=["Bin (microns)", "Count"])
         writer.writeheader()
         for bin_number, count in sorted_summary.items():
             bin_start = bin_number * bin_size
@@ -64,7 +61,6 @@ def summarize_droplet_sizes(csv_file_path):
             writer.writerow({"Bin (microns)": f"{bin_start}-{bin_end}", "Count": count})
 
     print(f"Droplet size summary has been written to {image_name}.csv")
-    print(f"Recorded {total_rois} total ROIs")
 
     # Extract the data for plotting
     bins = [bin_num * bin_size for bin_num in sorted_summary.keys()]
