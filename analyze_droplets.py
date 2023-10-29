@@ -29,9 +29,9 @@ import matplotlib.pyplot as plt
 def summarize_droplet_sizes(csv_file_path):
     """docstring goes here"""
     # image title
-    image_name = "_".join(
-        os.path.splitext(os.path.basename(csv_file_path))[0].split("_")[2:-1]
-    )
+    image_name = os.path.splitext(os.path.basename(csv_file_path))[0].split("_")[2:-1][
+        0
+    ]
     # Initialize a dictionary to store the summary
     summary = {}
     # Define the bin size for summarizing in increments of 10 microns
