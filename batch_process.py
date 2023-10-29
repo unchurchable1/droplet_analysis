@@ -50,18 +50,8 @@ def batch_process(image_folder):
                 if not (file.startswith("Tile0") and file.endswith(".jpg")):
                     os.remove(f"{current_folder}/{file}")
 
-            # Check if the album has already been processed
-            if os.path.exists(
-                f"droplets/images/{os.path.basename(current_folder)}.tif"
-            ):
-                if os.path.exists(
-                    f"droplets/results/Results_{os.path.basename(current_folder)}.csv"
-                ):
-                    print(f"Skipping folder: {current_folder}, already processed.")
-                    continue
             print(f"Processing folder: {current_folder}")
             processed += 1
-
             # Execute the ImageJ macro for the current folder
             command = [
                 "./ImageJ.exe",
