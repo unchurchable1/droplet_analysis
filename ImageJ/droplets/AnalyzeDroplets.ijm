@@ -19,11 +19,11 @@ run("Subtract Background...", "rolling=10 light stack");
 setOption("BlackBackground", false);
 run("Convert to Mask", "method=Default background=Light");
 run("Fill Holes", "stack");
-// Try to separate blobs into individual chromophores
+// Try to separate blobs into individual droplets
 run("Watershed", "stack");
 saveAs("tif", "droplets/images/" + File.getName(getTitle()));
 
-// Generate ROIs
+// Generate ROIs - exclude "uncircular" ROIs as well as those 4 pixels or fewer in size
 run("Set Measurements...", "area centroid perimeter fit shape feret's stack redirect=None decimal=3");
 run("Analyze Particles...", "size=33-Infinity circularity=0.50-1.00 show=Overlay display exclude include add stack");
 roiManager("Show None");
