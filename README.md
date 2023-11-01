@@ -18,5 +18,3 @@ For more details, please see the LICENSE file.
 
 ## TODO
 - better filtering of artifacts
-- better exception handling
-- better documentation
